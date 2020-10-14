@@ -20,7 +20,10 @@ employeeCtrl.getEmployee = async (req, res) => {
     const employee = await Employee.findById(req.params.id);
     res.send(employee);
 };
-employeeCtrl.editEmployee = (req, res) => {} 
+employeeCtrl.editEmployee = async (req, res) => {
+    await Employee.findByIdAndUpdate(req.params.id, req.body);
+    res.json({status: 'employee updated'})
+}; 
 
 employeeCtrl.deleteEmployee = async (req, res) => {
     await Employee.findByIdAndDelete(req.params.id)
